@@ -1,0 +1,106 @@
+{
+  "manifest_version": "1.0",
+  "note": "Curated extracts/summaries of PUBLIC-DOMAIN U.S. government sources. Each 'file' is our curated text; 'url' is the authoritative primary source it is drawn from. Always verify against the linked official page. U.S. federal government works are not subject to copyright.",
+  "sources": [
+    {
+      "id": "irs_fica_exemption",
+      "title": "IRS: Foreign Student Liability for Social Security and Medicare Taxes (FICA)",
+      "file": "documents/irs_fica_exemption.md",
+      "url": "https://www.irs.gov/individuals/international-taxpayers/foreign-student-liability-for-social-security-and-medicare-taxes",
+      "publisher": "Internal Revenue Service (IRS)",
+      "category": "tax",
+      "retrieved_date": "2026-08-24",
+      "summary": "When F-1/J-1 students are exempt from Social Security and Medicare (FICA) taxes, how the exemption is tied to nonresident status, and that OPT/CPT wages are covered while the student is a nonresident alien."
+    },
+    {
+      "id": "irs_pub519_residency",
+      "title": "IRS Publication 519: Substantial Presence Test and the Exempt Individual Rule",
+      "file": "documents/irs_pub519_residency.md",
+      "url": "https://www.irs.gov/forms-pubs/about-publication-519",
+      "publisher": "Internal Revenue Service (IRS)",
+      "category": "tax",
+      "retrieved_date": "2026-08-24",
+      "summary": "How the Substantial Presence Test works, the 5-year exempt-individual rule for F/J/M/Q students, and why residency status drives which tax form you file (1040-NR vs 1040)."
+    },
+    {
+      "id": "irs_form_8843",
+      "title": "IRS Form 8843: Statement for Exempt Individuals",
+      "file": "documents/irs_form_8843.md",
+      "url": "https://www.irs.gov/forms-pubs/about-form-8843",
+      "publisher": "Internal Revenue Service (IRS)",
+      "category": "tax",
+      "retrieved_date": "2026-08-24",
+      "summary": "Who must file Form 8843, that F-1/J-1 students must file it even with no income, and how it is filed (attached to a return or mailed alone)."
+    },
+    {
+      "id": "irs_form_1042s",
+      "title": "IRS Form 1042-S: Foreign Person's U.S. Source Income Subject to Withholding",
+      "file": "documents/irs_form_1042s.md",
+      "url": "https://www.irs.gov/forms-pubs/about-form-1042-s",
+      "publisher": "Internal Revenue Service (IRS)",
+      "category": "tax",
+      "retrieved_date": "2026-08-24",
+      "summary": "What Form 1042-S reports (scholarships over tuition, treaty-exempt wages, other U.S.-source income), how it appears on a student's return, and its ~March 15 furnishing timing."
+    },
+    {
+      "id": "dhs_initial_registration",
+      "title": "DHS/SEVP: Reporting to Your School & Initial SEVIS Registration",
+      "file": "documents/dhs_initial_registration.md",
+      "url": "https://studyinthestates.dhs.gov/sevis-help-hub/student-records/manage-program-dates-registration-and-course-load/registration",
+      "publisher": "U.S. Department of Homeland Security (DHS) / SEVP — Study in the States",
+      "category": "visa",
+      "retrieved_date": "2026-08-24",
+      "summary": "What to do right after you arrive: report to your DSO and complete your school's check-in so your DSO can complete initial SEVIS registration (within 30 days of the I-20 start date); I-901 fee + U.S. address prerequisites; each school sets its own required check-in forms on its international office website."
+    },
+    {
+      "id": "uscis_f1_oncampus_employment",
+      "title": "USCIS/SEVP: F-1 On-Campus Employment Rules",
+      "file": "documents/uscis_f1_oncampus_employment.md",
+      "url": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/students-and-employment",
+      "publisher": "U.S. Citizenship and Immigration Services (USCIS) / SEVP",
+      "category": "visa",
+      "retrieved_date": "2026-08-24",
+      "summary": "The 20-hours-per-week limit while school is in session, full-time during breaks, what counts as on-campus employment, and that no separate EAD is required."
+    },
+    {
+      "id": "uscis_cpt",
+      "title": "USCIS/SEVP: Curricular Practical Training (CPT)",
+      "file": "documents/uscis_cpt.md",
+      "url": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/students-and-employment",
+      "publisher": "U.S. Citizenship and Immigration Services (USCIS) / SEVP",
+      "category": "visa",
+      "retrieved_date": "2026-08-24",
+      "summary": "What CPT is, the one-academic-year and DSO-authorization requirements, part-time vs full-time, and the rule that 12+ months of full-time CPT eliminates OPT eligibility."
+    },
+    {
+      "id": "uscis_opt",
+      "title": "USCIS/SEVP: Optional Practical Training (OPT)",
+      "file": "documents/uscis_opt.md",
+      "url": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/optional-practical-training-opt-for-f-1-students",
+      "publisher": "U.S. Citizenship and Immigration Services (USCIS) / SEVP",
+      "category": "visa",
+      "retrieved_date": "2026-08-24",
+      "summary": "12 months of OPT per education level, pre- vs post-completion rules, applying via Form I-765 for an EAD, and the 90-day unemployment limit on post-completion OPT."
+    },
+    {
+      "id": "uscis_stem_opt",
+      "title": "USCIS/SEVP: STEM OPT 24-Month Extension",
+      "file": "documents/uscis_stem_opt.md",
+      "url": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/optional-practical-training-extension-for-stem-students-stem-opt",
+      "publisher": "U.S. Citizenship and Immigration Services (USCIS) / SEVP",
+      "category": "visa",
+      "retrieved_date": "2026-08-24",
+      "summary": "The 24-month STEM OPT extension: E-Verify employer and Form I-983 requirements, filing via Form I-765, the 180-day pending-application work rule, and the extra 60 days (150 total) of unemployment."
+    },
+    {
+      "id": "cfpb_remittances",
+      "title": "CFPB: Sending Money Abroad — Remittance Transfer Protections",
+      "file": "documents/cfpb_remittances.md",
+      "url": "https://www.consumerfinance.gov/consumer-tools/sending-money/",
+      "publisher": "Consumer Financial Protection Bureau (CFPB)",
+      "category": "finance",
+      "retrieved_date": "2026-08-24",
+      "summary": "Consumer protections for sending money abroad: prepayment disclosures (exchange rate, fees, amount received), the ~30-minute cancellation right, and 180-day error-resolution rights."
+    }
+  ]
+}

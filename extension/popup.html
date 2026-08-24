@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">🎓 GlobeStudy</div>
+    <a id="settingsLink" href="#" title="Settings">⚙️</a>
+  </header>
+
+  <p class="disclaimer">
+    Informational only — not licensed tax, legal, or immigration advice. Confirm with your DSO and a licensed professional.
+  </p>
+
+  <div class="ask-row">
+    <textarea id="q" rows="2" placeholder="Ask a visa, tax, or money question…"></textarea>
+    <div class="ask-buttons">
+      <button id="mic" title="Speak your question">🎤</button>
+      <button id="ask" class="primary">Ask</button>
+    </div>
+  </div>
+
+  <div id="status" class="status"></div>
+  <div id="answer" class="answer"></div>
+
+  <footer>
+    <span id="apiLabel"></span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

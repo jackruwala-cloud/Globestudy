@@ -1,0 +1,43 @@
+{
+  "id": "mid_year",
+  "stage": "Continuing / Mid-program",
+  "title": "Continuing Student — Changes, Contacts & Requests",
+  "intro": "For students already in the U.S. making changes mid-program (major changes, travel, internships, transfers). Most of these require action by your DSO — this checklist tells you what to line up. (Email-drafting and Gmail sending are on the roadmap.)",
+  "sections": [
+    {
+      "category": "Changing / adding / dropping a major",
+      "items": [
+        {"text": "Talk to your academic advisor first to confirm the change and its effect on your program end date and full-time status.", "source_id": null},
+        {"text": "Ask your DSO to update SEVIS and issue a new Form I-20 reflecting the change — request this before the change takes effect.", "source_id": null},
+        {"text": "If your new major is STEM, note it may affect later STEM OPT eligibility — confirm the CIP code with your DSO.", "source_id": "uscis_stem_opt"}
+      ]
+    },
+    {
+      "category": "Travel & I-20 signatures",
+      "items": [
+        {"text": "Before international travel, request a valid travel signature on your Form I-20 from your DSO (signatures expire — check the date).", "source_id": null},
+        {"text": "Carry a valid passport, unexpired F-1 visa, signed I-20, and proof of enrollment/funds when re-entering the U.S.", "source_id": null}
+      ]
+    },
+    {
+      "category": "Internships & work (CPT)",
+      "items": [
+        {"text": "For an internship that's part of your curriculum, you need CPT authorization from your DSO on your I-20 BEFORE you start working.", "source_id": "uscis_cpt"},
+        {"text": "Watch the rule that 12+ months of full-time CPT eliminates OPT eligibility.", "source_id": "uscis_cpt"}
+      ]
+    },
+    {
+      "category": "Transferring schools",
+      "items": [
+        {"text": "Get admitted to the new school, then coordinate a SEVIS transfer release date between your current and new DSO.", "source_id": null},
+        {"text": "Complete transfer enrollment within required timeframes to keep your status; the new school issues a transfer-pending I-20.", "source_id": null}
+      ]
+    },
+    {
+      "category": "Getting the right contacts / drafting requests",
+      "items": [
+        {"text": "Keep your DSO and academic advisor emails handy. Typical requests: a new I-20 after a change, a travel signature, or a CPT recommendation.", "source_id": null}
+      ]
+    }
+  ]
+}

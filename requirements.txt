@@ -1,0 +1,8 @@
+# Core (required)
+streamlit>=1.30
+PyYAML>=6.0
+requests>=2.28
+
+# Optional — only needed for specific features:
+#   chromadb>=0.4     # only if retrieval.backend = chroma
+#   anthropic>=0.40   # only if qa.mode = llm

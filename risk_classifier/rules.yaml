@@ -1,0 +1,83 @@
+# Risk classification rules. Edit these to tune how questions are categorized.
+# Matching is case-insensitive whole-word/substring on the question text.
+#
+# Policy: when in doubt, classify HIGH. It is safer to over-warn than to present
+# a visa/tax answer as final. A question is LOW only when it matches a low-stakes
+# term AND matches no high-stakes term.
+
+high_stakes:
+  description: >
+    Visa status implications, tax filing specifics, and work-authorization limits.
+    Always shown with a "verify with a licensed professional / your DSO" notice.
+  keywords:
+    - visa
+    - status
+    - immigration
+    - deport
+    - out of status
+    - unlawful presence
+    - opt
+    - cpt
+    - stem
+    - ead
+    - work authorization
+    - work permit
+    - i-765
+    - i-983
+    - i-20
+    - i20
+    - sevis
+    - dso
+    - unemployment limit
+    - on-campus hours
+    - hours can i work
+    - hours per week
+    - tax
+    - taxes
+    - taxed
+    - filing
+    - file a return
+    - "1040"
+    - 1040nr
+    - "8843"
+    - "1042"
+    - w-2
+    - fica
+    - social security
+    - medicare
+    - withholding
+    - treaty
+    - resident
+    - nonresident
+    - residency
+    - substantial presence
+    - ssn
+    - itin
+    - refund
+    - deduction
+    - scholarship
+    - fellowship
+    - stipend
+
+low_stakes:
+  description: >
+    General financial literacy and how things work in principle. Can be answered
+    more directly, but still cited to a source.
+  keywords:
+    - budget
+    - budgeting
+    - save money
+    - saving
+    - savings
+    - how remittance
+    - remittance
+    - send money
+    - sending money
+    - transfer money
+    - exchange rate
+    - credit score
+    - build credit
+    - open a bank account
+    - checking account
+    - cost of living
+    - wire transfer

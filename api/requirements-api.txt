@@ -1,0 +1,7 @@
+# Runtime dependencies for the API service ONLY (no Streamlit needed in prod).
+fastapi>=0.110
+uvicorn[standard]>=0.29
+PyYAML>=6.0
+requests>=2.28
+# Optional: only if you set qa.mode=llm
+#   anthropic>=0.40

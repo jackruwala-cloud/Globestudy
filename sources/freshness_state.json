@@ -1,0 +1,111 @@
+{
+  "sources": {
+    "irs_fica_exemption": {
+      "url": "https://www.irs.gov/individuals/international-taxpayers/foreign-student-liability-for-social-security-and-medicare-taxes",
+      "title": "IRS: Foreign Student Liability for Social Security and Medicare Taxes (FICA)",
+      "retrieved_date": "2026-08-24",
+      "is_stale": false,
+      "last_checked": "2026-08-24T19:29:51.396723+00:00",
+      "http_status": 200,
+      "content_hash": "c63539d091f1ccf0ffdab017ca17d845696e8e05edb92a477ffc52a05c968361",
+      "text_len": 10499,
+      "last_error": null,
+      "status": "baseline"
+    },
+    "irs_pub519_residency": {
+      "url": "https://www.irs.gov/forms-pubs/about-publication-519",
+      "title": "IRS Publication 519: Substantial Presence Test and the Exempt Individual Rule",
+      "retrieved_date": "2026-08-24",
+      "is_stale": false,
+      "last_checked": "2026-08-24T19:29:52.185712+00:00",
+      "http_status": 200,
+      "content_hash": "3005af7277944ea8073a4e9f18905d9e64cf318872234e5cc3cfa160bfa75641",
+      "text_len": 6460,
+      "last_error": null,
+      "status": "baseline"
+    },
+    "irs_form_8843": {
+      "url": "https://www.irs.gov/forms-pubs/about-form-8843",
+      "title": "IRS Form 8843: Statement for Exempt Individuals",
+      "retrieved_date": "2026-08-24",
+      "is_stale": false,
+      "last_checked": "2026-08-24T19:29:52.504759+00:00",
+      "http_status": 200,
+      "content_hash": "af485667c302e6d77907169adb738e60e3e34cac15e8a11b9adbfd810942c867",
+      "text_len": 5902,
+      "last_error": null,
+      "status": "baseline"
+    },
+    "irs_form_1042s": {
+      "url": "https://www.irs.gov/forms-pubs/about-form-1042-s",
+      "title": "IRS Form 1042-S: Foreign Person's U.S. Source Income Subject to Withholding",
+      "retrieved_date": "2026-08-24",
+      "is_stale": false,
+      "last_checked": "2026-08-24T19:29:52.713559+00:00",
+      "http_status": 200,
+      "content_hash": "8318deba6f4248170507a81430342d5338c1beb3d1fe8c4520462e59404ea842",
+      "text_len": 6573,
+      "last_error": null,
+      "status": "baseline"
+    },
+    "uscis_f1_oncampus_employment": {
+      "url": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/students-and-employment",
+      "title": "USCIS/SEVP: F-1 On-Campus Employment Rules",
+      "retrieved_date": "2026-08-24",
+      "is_stale": false,
+      "last_checked": "2026-08-24T19:29:52.926862+00:00",
+      "http_status": 200,
+      "content_hash": "657dde94b4455cbafb9fd9a4ca8818e69dfa75940a864231427be1a26bc72079",
+      "text_len": 8523,
+      "last_error": null,
+      "status": "baseline"
+    },
+    "uscis_cpt": {
+      "url": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/students-and-employment",
+      "title": "USCIS/SEVP: Curricular Practical Training (CPT)",
+      "retrieved_date": "2026-08-24",
+      "is_stale": false,
+      "last_checked": "2026-08-24T19:29:53.060026+00:00",
+      "http_status": 200,
+      "content_hash": "657dde94b4455cbafb9fd9a4ca8818e69dfa75940a864231427be1a26bc72079",
+      "text_len": 8523,
+      "last_error": null,
+      "status": "baseline"
+    },
+    "uscis_opt": {
+      "url": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/optional-practical-training-opt-for-f-1-students",
+      "title": "USCIS/SEVP: Optional Practical Training (OPT)",
+      "retrieved_date": "2026-08-24",
+      "is_stale": false,
+      "last_checked": "2026-08-24T19:29:53.500005+00:00",
+      "http_status": 200,
+      "content_hash": "585556e48ae1ad62b088d46ae824fb9fa91147af38dc59762cb5dd0ce77e3841",
+      "text_len": 12798,
+      "last_error": null,
+      "status": "baseline"
+    },
+    "uscis_stem_opt": {
+      "url": "https://www.uscis.gov/working-in-the-united-states/students-and-exchange-visitors/optional-practical-training-extension-for-stem-students-stem-opt",
+      "title": "USCIS/SEVP: STEM OPT 24-Month Extension",
+      "retrieved_date": "2026-08-24",
+      "is_stale": false,
+      "last_checked": "2026-08-24T19:29:53.776690+00:00",
+      "http_status": 200,
+      "content_hash": "cc081851598dd7b03c0039d52d4aa2291b621220e80ecf6ea9d1782bde1da389",
+      "text_len": 16398,
+      "last_error": null,
+      "status": "baseline"
+    },
+    "cfpb_remittances": {
+      "url": "https://www.consumerfinance.gov/consumer-tools/sending-money/",
+      "title": "CFPB: Sending Money Abroad — Remittance Transfer Protections",
+      "retrieved_date": "2026-08-24",
+      "is_stale": false,
+      "last_checked": "2026-08-24T19:29:53.886708+00:00",
+      "http_status": 403,
+      "status": "error",
+      "last_error": "HTTP 403"
+    }
+  },
+  "last_run": "2026-08-24T19:29:50.641279+00:00"
+}

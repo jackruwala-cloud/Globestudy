@@ -1,0 +1,14 @@
+# Secrets / local config
+config.yaml
+.env
+
+# Runtime data (logs, built index, vector store)
+data/
+!data/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store

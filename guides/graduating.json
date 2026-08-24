@@ -1,0 +1,37 @@
+{
+  "id": "graduating",
+  "stage": "Graduating / Next steps",
+  "title": "Graduating Student — Work, Visa & Tax Next Steps",
+  "intro": "For students approaching graduation and planning what's next (work authorization, status, taxes). These are high-stakes and time-sensitive — confirm every date with your DSO.",
+  "sections": [
+    {
+      "category": "Work authorization after graduation (OPT)",
+      "items": [
+        {"text": "You can apply for up to 12 months of post-completion OPT related to your major. Request a DSO recommendation, then file Form I-765 for the EAD within the required window tied to your program end date.", "source_id": "uscis_opt"},
+        {"text": "On post-completion OPT you may not accrue more than 90 days of unemployment — track it carefully.", "source_id": "uscis_opt"}
+      ]
+    },
+    {
+      "category": "STEM OPT extension (if eligible)",
+      "items": [
+        {"text": "A qualifying STEM degree can get a one-time 24-month extension. You'll need an E-Verify employer and a signed Form I-983 training plan.", "source_id": "uscis_stem_opt"},
+        {"text": "The STEM extension adds 60 more days of allowed unemployment (150 total across OPT).", "source_id": "uscis_stem_opt"}
+      ]
+    },
+    {
+      "category": "Taxes as your status evolves",
+      "items": [
+        {"text": "Your residency status can change as your years in the U.S. add up (the 5-year exempt rule), which changes which return you file.", "source_id": "irs_pub519_residency"},
+        {"text": "Watch for a Form 1042-S (e.g. treaty-exempt wages or taxable scholarship) in addition to any W-2 when you file.", "source_id": "irs_form_1042s"},
+        {"text": "OPT/CPT wages stay FICA-exempt only while you remain a nonresident alien; once you become a resident alien, FICA applies.", "source_id": "irs_fica_exemption"}
+      ]
+    },
+    {
+      "category": "Keep your record clean",
+      "items": [
+        {"text": "Report employer and address changes to your DSO promptly (especially on OPT/STEM OPT) to stay in status.", "source_id": null},
+        {"text": "Plan early — OPT processing takes time, so start the DSO conversation months before you graduate.", "source_id": null}
+      ]
+    }
+  ]
+}

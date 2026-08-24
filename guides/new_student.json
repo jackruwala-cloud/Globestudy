@@ -1,0 +1,50 @@
+{
+  "id": "new_student",
+  "stage": "Arriving / New student",
+  "title": "New F-1 Student — Getting Settled Checklist",
+  "intro": "A starting checklist for your first weeks in the U.S. Rule-based items link to an official source; logistics items are general guidance — confirm anything about your status with your DSO / international student office.",
+  "sections": [
+    {
+      "category": "FIRST, right after you land: complete your school's check-in",
+      "items": [
+        {"text": "Report to your school's Designated School Official (DSO) and complete your school's mandatory immigration check-in so the DSO can finish your initial SEVIS registration (generally within 30 days of your I-20 start date). Until this is done, your record isn't active for the term.", "source_id": "dhs_initial_registration"},
+        {"text": "Your specific school sets its OWN required check-in forms, deadlines, and documents — usually completed before or right after orientation. Find and follow YOUR international student office's official website; the exact form differs by school and this checklist can't replace it.", "source_id": "dhs_initial_registration"},
+        {"text": "Make sure your I-901 SEVIS fee is paid and have a U.S. physical address ready to give your DSO — SEVIS won't register an Initial-status record without both.", "source_id": "dhs_initial_registration"},
+        {"text": "Bring your passport, F-1 visa stamp, Form I-20, and I-94 to check-in.", "source_id": "dhs_initial_registration"}
+      ]
+    },
+    {
+      "category": "Immigration & status",
+      "items": [
+        {"text": "Keep your passport, F-1 visa stamp, most recent Form I-20, and I-94 record valid and stored safely (digital + paper copies).", "source_id": null},
+        {"text": "Confirm with your DSO that your SEVIS record is 'Active' after you arrive and enroll.", "source_id": null},
+        {"text": "Know your on-campus work limit: up to 20 hours/week while school is in session, full-time during official breaks. No separate work permit needed for on-campus work.", "source_id": "uscis_f1_oncampus_employment"},
+        {"text": "Maintain a full course load every term — dropping below full-time without prior DSO authorization can break your status.", "source_id": null}
+      ]
+    },
+    {
+      "category": "Taxes (set up now, file later)",
+      "items": [
+        {"text": "Even if you earn no U.S. income, you generally must file Form 8843 for each year you are an exempt individual.", "source_id": "irs_form_8843"},
+        {"text": "Learn your tax residency: F-1 students are usually 'exempt individuals' (nonresident) for their first 5 calendar years, which affects which return you file.", "source_id": "irs_pub519_residency"},
+        {"text": "If you work, you're generally exempt from Social Security/Medicare (FICA) tax while a nonresident — check your paystub so it isn't withheld in error.", "source_id": "irs_fica_exemption"}
+      ]
+    },
+    {
+      "category": "Money & banking",
+      "items": [
+        {"text": "Open a U.S. checking account (most students bring passport, I-20, and proof of address). Ask about no-fee student accounts.", "source_id": null},
+        {"text": "When sending money home, compare the total cost (fees + exchange-rate margin); you have disclosure, cancellation, and error-resolution rights.", "source_id": "cfpb_remittances"},
+        {"text": "Start building a simple monthly budget for rent, food, phone, transport, and health insurance.", "source_id": null}
+      ]
+    },
+    {
+      "category": "School & campus",
+      "items": [
+        {"text": "Save your DSO / international student office contact and your academic advisor's contact — you'll need both often.", "source_id": null},
+        {"text": "Complete enrollment, get your student ID, and confirm your health insurance is active.", "source_id": null},
+        {"text": "Attend international-student orientation — it usually covers status, work, and tax basics specific to your school.", "source_id": null}
+      ]
+    }
+  ]
+}

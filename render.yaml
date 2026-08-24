@@ -1,0 +1,20 @@
+# Render.com blueprint. Deploy in ~2 minutes:
+#   1. Push the intl-student-advisor/ folder to a GitHub repo (its root = repo root).
+#   2. On render.com: New + > Blueprint > pick the repo. Render reads this file.
+#   3. Set ALLOWED_ORIGINS to your Lovable app URL after first deploy.
+# The service URL Render gives you goes into the app's Settings > API base URL.
+services:
+  - type: web
+    name: globestudy-api
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r api/requirements-api.txt && python -m ingestion.build_index"
+    startCommand: "uvicorn api.main:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: ALLOWED_ORIGINS
+        # Start permissive; tighten to your app origin(s) once deployed, e.g.
+        # "https://your-app.lovable.app"
+        value: "*"

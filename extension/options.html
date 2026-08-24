@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="popup.css" />
+  <style> body { width: 420px; } .field { margin: 10px 0; } input { width: 100%; padding: 8px; border:1px solid var(--border); border-radius:8px; font:inherit; } </style>
+</head>
+<body>
+  <header><div class="brand">⚙️ GlobeStudy Settings</div></header>
+  <div class="field">
+    <label for="url"><strong>API base URL</strong></label>
+    <input id="url" type="text" placeholder="http://localhost:8000" />
+    <p class="src-meta">Where the citation "brain" API is hosted. Deploy it (see DEPLOY.md) or run a tunnel, then paste the URL here.</p>
+  </div>
+  <div class="ask-buttons">
+    <button id="test">Test connection</button>
+    <button id="save" class="primary">Save</button>
+  </div>
+  <div id="status" class="status"></div>
+  <p class="disclaimer">Informational only — not licensed tax, legal, or immigration advice.</p>
+  <script src="options.js"></script>
+</body>
+</html>

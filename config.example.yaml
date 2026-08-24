@@ -1,0 +1,22 @@
+# Copy this file to config.yaml and edit as needed.
+#   cp config.example.yaml config.yaml
+#
+# Secrets should come from the environment when possible. If ANTHROPIC_API_KEY
+# is set in your environment, it overrides anthropic.api_key below.
+
+retrieval:
+  backend: tfidf        # tfidf (default, pure-Python, offline) | chroma
+  top_k: 5
+  min_score: 0.19       # if the top result is below this, refuse to answer (no guessing)
+  support_floor: 0.10   # once answering, include supporting citations down to here
+  high_conf_score: 0.28 # at/above this the top match is labeled "high" confidence
+
+qa:
+  mode: extractive      # extractive (default, no LLM, cannot hallucinate) | llm
+  llm_model: claude-sonnet-5
+  max_context_chunks: 4
+
+anthropic:
+  # Only used when qa.mode = llm. Prefer setting ANTHROPIC_API_KEY in your env
+  # instead of writing the key here. Never commit a real key.
+  api_key: ""

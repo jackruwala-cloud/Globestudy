@@ -1,0 +1,10 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+data/chroma/
+data/*.log
+data/qa_log.jsonl
+data/feedback.jsonl
+.git/
+.DS_Store

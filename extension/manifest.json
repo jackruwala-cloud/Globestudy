@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "GlobeStudy — Student Advisor",
+  "version": "0.1.0",
+  "description": "Quick, cited answers on U.S. visa, tax & money questions for international students. Every answer traces to an official source.",
+  "action": {
+    "default_title": "GlobeStudy Advisor",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "permissions": ["storage"],
+  "host_permissions": ["http://localhost/*", "http://127.0.0.1/*", "https://*/*"]
+}
