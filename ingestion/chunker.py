@@ -71,6 +71,10 @@ def build_chunks() -> List[Dict[str, Any]]:
                     "retrieved_date": src["retrieved_date"],
                     "section": section["title"],
                     "text": section["body"],
+                    # Scope: "federal" (default, shown to everyone) or "university"
+                    # (shown only to students of the matching university_id).
+                    "scope": src.get("scope", "federal"),
+                    "university_id": src.get("university_id"),
                 }
             )
     return chunks

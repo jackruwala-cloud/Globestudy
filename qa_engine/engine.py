@@ -223,7 +223,7 @@ def _guide_answer(question: str, guide: Dict[str, Any], risk, cfg: Dict[str, Any
     )
 
 
-def answer(question: str) -> Answer:
+def answer(question: str, university_id: Optional[str] = None) -> Answer:
     cfg = config.get_config()
     risk = classify(question)
 
@@ -236,7 +236,9 @@ def answer(question: str) -> Answer:
         return ans
 
     retriever = get_retriever(cfg["retrieval"]["backend"])
-    results = retriever.query(question, k=cfg["retrieval"]["top_k"])
+    # university_id lets the student's own school sources (scope: university)
+    # join the federal sources in retrieval; federal sources always apply.
+    results = retriever.query(question, k=cfg["retrieval"]["top_k"], university_id=university_id)
 
     top_score = results[0].score if results else 0.0
     confidence = _confidence_label(top_score, cfg)

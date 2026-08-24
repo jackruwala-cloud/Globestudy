@@ -85,11 +85,20 @@ class TfidfRetriever:
             vec[term] = (1.0 + math.log(count)) * idf
         return vec
 
-    def query(self, text: str, k: int = 4) -> List[Retrieved]:
+    def _allowed(self, chunk: Dict[str, Any], university_id: Optional[str]) -> bool:
+        # Federal sources are visible to everyone; university-scoped sources only
+        # to students of that university.
+        if chunk.get("scope", "federal") != "university":
+            return True
+        return university_id is not None and chunk.get("university_id") == university_id
+
+    def query(self, text: str, k: int = 4, university_id: Optional[str] = None) -> List[Retrieved]:
         q_vec = self._vectorize(_tokenize(text))
         q_norm = math.sqrt(sum(w * w for w in q_vec.values())) or 1.0
         results: List[Retrieved] = []
         for i, doc_vec in enumerate(self.doc_vectors):
+            if not self._allowed(self.chunks[i], university_id):
+                continue
             # Iterate over the shorter vector for the dot product.
             if len(q_vec) < len(doc_vec):
                 dot = sum(w * doc_vec.get(term, 0.0) for term, w in q_vec.items())
@@ -113,8 +122,9 @@ class ChromaRetriever:
         client = chromadb.PersistentClient(path=paths.CHROMA_DIR)
         self.collection = client.get_or_create_collection("primary_sources")
 
-    def query(self, text: str, k: int = 4) -> List[Retrieved]:
-        res = self.collection.query(query_texts=[text], n_results=k)
+    def query(self, text: str, k: int = 4, university_id: Optional[str] = None) -> List[Retrieved]:
+        # Over-fetch so we can post-filter university-scoped chunks.
+        res = self.collection.query(query_texts=[text], n_results=k + 8)
         ids = (res.get("ids") or [[]])[0]
         dists = (res.get("distances") or [[None] * len(ids)])[0]
         out: List[Retrieved] = []
@@ -122,6 +132,10 @@ class ChromaRetriever:
             chunk = self._by_id.get(cid)
             if not chunk:
                 continue
+            if chunk.get("scope", "federal") == "university" and chunk.get("university_id") != university_id:
+                continue
+            if len(out) >= k:
+                break
             # Chroma default distance is cosine distance in [0, 2]; map to similarity.
             score = 1.0 - float(dist) if dist is not None else 0.0
             out.append(Retrieved(chunk=chunk, score=round(max(0.0, score), 4)))

@@ -187,6 +187,22 @@ To add a specific school's official guidance, add a manifest entry whose `url`
 host ends in `.edu` (e.g. your international office's "new students" page). It
 passes the policy and becomes citable for that school's students.
 
+**Per-university sourcing.** A manifest source may be `scope: "federal"`
+(default — shown to everyone) or `scope: "university"` with a `university_id`
+(shown only to students of that school). `POST /ask` takes an optional
+`university_id`, and retrieval merges federal sources with that school's `.edu`
+sources; the response also carries a `school_context` (the school's
+international-office link) so the app can always point a student to their office,
+even when no school-specific source is curated yet. See `sources/documents/uiuc_isss.md`
+for the template, and `reference/universities.json` for the picker registry
+(expandable via `scripts/build_universities.py`).
+
+**Which sources cover what.** Visa/tax answers draw on **USCIS, IRS, DOL, DHS/SEVP,
+and the student's university**. DHS/SEVP (Study in the States) is kept because it
+is the authority on SEVIS/check-in/CPT/OPT reporting. **CFPB** is used only for
+lower-stakes financial-literacy content (e.g. sending money home) and never as a
+visa/tax citation.
+
 ## Adding new primary sources
 
 Keep the bar high: only add official, authoritative sources (the build enforces this).

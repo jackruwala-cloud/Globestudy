@@ -93,6 +93,18 @@
       "summary": "The 24-month STEM OPT extension: E-Verify employer and Form I-983 requirements, filing via Form I-765, the 180-day pending-application work rule, and the extra 60 days (150 total) of unemployment."
     },
     {
+      "id": "uiuc_isss",
+      "title": "UIUC: International Student Check-In (ISSS)",
+      "file": "documents/uiuc_isss.md",
+      "url": "https://isss.illinois.edu/students/check-in/",
+      "publisher": "University of Illinois Urbana-Champaign — International Student & Scholar Services (ISSS)",
+      "category": "visa",
+      "scope": "university",
+      "university_id": "uiuc",
+      "retrieved_date": "2026-08-24",
+      "summary": "UIUC's mandatory new-student immigration check-in: the two-step ISSS process (online check-in form + in-person document review), documents to bring, and how it completes initial SEVIS registration. School-specific source shown only to UIUC students."
+    },
+    {
       "id": "cfpb_remittances",
       "title": "CFPB: Sending Money Abroad — Remittance Transfer Protections",
       "file": "documents/cfpb_remittances.md",

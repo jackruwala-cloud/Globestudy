@@ -1,0 +1,22 @@
+{
+  "note": "Countries that have an income tax treaty with the United States, per IRS Publication 901 (U.S. Tax Treaties). Used ONLY to show a cited POINTER ('your country has a U.S. tax treaty — check Pub 901'), never to determine benefits. Treaty status and benefits change and depend on your specific situation; always verify in Pub 901. Matching is done client-side so a student's citizenship never leaves their device.",
+  "citation": {
+    "title": "IRS Publication 901: U.S. Tax Treaties",
+    "publisher": "Internal Revenue Service (IRS)",
+    "url": "https://www.irs.gov/forms-pubs/about-publication-901",
+    "retrieved_date": "2026-08-24"
+  },
+  "countries": [
+    "Armenia", "Australia", "Austria", "Azerbaijan", "Bangladesh", "Barbados",
+    "Belarus", "Belgium", "Bulgaria", "Canada", "Chile", "China", "Cyprus",
+    "Czech Republic", "Denmark", "Egypt", "Estonia", "Finland", "France",
+    "Georgia", "Germany", "Greece", "Iceland", "India", "Indonesia", "Ireland",
+    "Israel", "Italy", "Jamaica", "Japan", "Kazakhstan", "Korea, South",
+    "Kyrgyzstan", "Latvia", "Lithuania", "Luxembourg", "Malta", "Mexico",
+    "Moldova", "Morocco", "Netherlands", "New Zealand", "Norway", "Pakistan",
+    "Philippines", "Poland", "Portugal", "Romania", "Slovak Republic",
+    "Slovenia", "South Africa", "Spain", "Sri Lanka", "Sweden", "Switzerland",
+    "Tajikistan", "Thailand", "Trinidad and Tobago", "Tunisia", "Turkey",
+    "Turkmenistan", "Ukraine", "United Kingdom", "Uzbekistan", "Venezuela"
+  ]
+}

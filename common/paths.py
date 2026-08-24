@@ -11,6 +11,11 @@ DOCUMENTS_DIR = os.path.join(SOURCES_DIR, "documents")
 MANIFEST_PATH = os.path.join(SOURCES_DIR, "manifest.json")
 FRESHNESS_STATE_PATH = os.path.join(SOURCES_DIR, "freshness_state.json")
 
+# Committed, curated reference data (not runtime-generated).
+REFERENCE_DIR = os.path.join(ROOT, "reference")
+UNIVERSITIES_PATH = os.path.join(REFERENCE_DIR, "universities.json")
+TAX_TREATY_PATH = os.path.join(REFERENCE_DIR, "tax_treaty_countries.json")
+
 DATA_DIR = os.path.join(ROOT, "data")
 CHUNKS_PATH = os.path.join(DATA_DIR, "chunks.json")
 CHROMA_DIR = os.path.join(DATA_DIR, "chroma")

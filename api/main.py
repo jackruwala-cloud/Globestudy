@@ -14,6 +14,7 @@ Design notes:
 """
 from __future__ import annotations
 
+import json
 import os
 from typing import Any, Dict, List, Optional
 
@@ -21,12 +22,27 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from common import config
+from common import config, paths
 from ingestion.chunker import load_manifest
 from qa_engine import guides as guides_mod
 from qa_engine.email_drafter import draft_email
 from qa_engine.engine import answer as engine_answer
 from qa_engine.prompts import DISCLAIMER
+
+
+def _load_json(path: str) -> Dict[str, Any]:
+    with open(path, "r", encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+# Curated reference data (loaded once).
+_UNIVERSITIES: List[Dict[str, Any]] = _load_json(paths.UNIVERSITIES_PATH)["universities"]
+_UNI_BY_ID: Dict[str, Dict[str, Any]] = {u["id"]: u for u in _UNIVERSITIES}
+_UNIS_WITH_SOURCE = {
+    s.get("university_id")
+    for s in load_manifest()["sources"]
+    if s.get("scope") == "university" and s.get("university_id")
+}
 
 app = FastAPI(title="International Student Advisor API", version="0.2.0")
 
@@ -47,6 +63,7 @@ app.add_middleware(
 # ------------------------------- models -------------------------------
 class AskRequest(BaseModel):
     question: str
+    university_id: Optional[str] = None  # non-PII; personalizes sources only
 
 
 class DraftEmailRequest(BaseModel):
@@ -68,13 +85,55 @@ def health() -> Dict[str, Any]:
         "retrieval_backend": cfg["retrieval"]["backend"],
         "num_sources": len(manifest["sources"]),
         "num_guides": len(all_guides),
+        "num_universities": len(_UNIVERSITIES),
         "disclaimer": DISCLAIMER,
+    }
+
+
+def _school_context(university_id: Optional[str]) -> Optional[Dict[str, Any]]:
+    if not university_id:
+        return None
+    u = _UNI_BY_ID.get(university_id)
+    if not u:
+        return None
+    return {
+        "university_id": u["id"],
+        "name": u["name"],
+        "international_office_url": u.get("international_office_url") or u.get("main_url"),
+        "has_curated_source": university_id in _UNIS_WITH_SOURCE,
     }
 
 
 @app.post("/ask")
 def ask(req: AskRequest) -> Dict[str, Any]:
-    return engine_answer(req.question).to_dict()
+    result = engine_answer(req.question, university_id=req.university_id).to_dict()
+    # Attach the student's school office as context so the app can always show a
+    # DSO/office pointer, even when no school-specific source was curated yet.
+    result["school_context"] = _school_context(req.university_id)
+    return result
+
+
+@app.get("/universities")
+def universities(q: str = "", limit: int = 20) -> List[Dict[str, Any]]:
+    ql = (q or "").strip().lower()
+    matches = _UNIVERSITIES if not ql else [
+        u for u in _UNIVERSITIES
+        if ql in u["name"].lower() or ql in u.get("city", "").lower() or ql in u.get("state", "").lower()
+    ]
+    matches = sorted(matches, key=lambda u: u["name"])[: max(1, min(limit, 100))]
+    return [
+        {
+            "id": u["id"], "name": u["name"], "city": u.get("city", ""), "state": u.get("state", ""),
+            "international_office_url": u.get("international_office_url") or u.get("main_url"),
+            "has_curated_source": u["id"] in _UNIS_WITH_SOURCE,
+        }
+        for u in matches
+    ]
+
+
+@app.get("/tax_treaty_countries")
+def tax_treaty_countries() -> Dict[str, Any]:
+    return _load_json(paths.TAX_TREATY_PATH)
 
 
 @app.get("/guides")
