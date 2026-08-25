@@ -30,6 +30,7 @@ ALLOWED_GOV_DOMAINS = [
     "dol.gov",            # Department of Labor
     "state.gov",          # Dept. of State (travel.state.gov visas)
     "ssa.gov",            # Social Security (SSN)
+    "federalregister.gov",  # official U.S. government publication of record (rules)
     "consumerfinance.gov",  # CFPB — federal agency (financial-literacy items)
 ]
 

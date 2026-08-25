@@ -93,6 +93,16 @@
       "summary": "The 24-month STEM OPT extension: E-Verify employer and Form I-983 requirements, filing via Form I-765, the 180-day pending-application work rule, and the extra 60 days (150 total) of unemployment."
     },
     {
+      "id": "dhs_ds_elimination",
+      "title": "DHS Final Rule: Fixed Admission Periods Replace Duration of Status (effective Sept 15, 2026)",
+      "file": "documents/dhs_ds_elimination.md",
+      "url": "https://www.federalregister.gov/documents/2026/07/17/2026-14439/establishing-a-fixed-time-period-of-admission-and-an-extension-of-stay-procedure-for-nonimmigrant",
+      "publisher": "U.S. Department of Homeland Security (DHS) — Federal Register",
+      "category": "visa",
+      "retrieved_date": "2026-08-25",
+      "summary": "DHS's July 17, 2026 final rule (effective Sept 15, 2026) ends 'duration of status' for F/J/I nonimmigrants and admits F-1 students until the I-20 program end date (max 4 years) plus a 30-day grace period, with a new USCIS Extension of Stay process. Major rule subject to Congressional review — verify applicability with your DSO."
+    },
+    {
       "id": "uiuc_isss",
       "title": "UIUC: International Student Check-In (ISSS)",
       "file": "documents/uiuc_isss.md",

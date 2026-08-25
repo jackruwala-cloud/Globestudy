@@ -28,6 +28,7 @@ from qa_engine import guides as guides_mod
 from qa_engine.email_drafter import draft_email
 from qa_engine.engine import answer as engine_answer
 from qa_engine.prompts import DISCLAIMER
+from qa_engine.status_calendar import compute_calendar
 
 
 def _load_json(path: str) -> Dict[str, Any]:
@@ -71,6 +72,17 @@ class DraftEmailRequest(BaseModel):
     request_type: str = ""
     fields: Dict[str, str] = {}
     use_llm: bool = False
+
+
+class CalendarRequest(BaseModel):
+    program_start_date: Optional[str] = None
+    program_end_date: Optional[str] = None
+    opt_ead_start_date: Optional[str] = None
+    opt_ead_end_date: Optional[str] = None
+    i94_end_date: Optional[str] = None
+    visa_expiry_date: Optional[str] = None
+    is_stem: bool = False
+    as_of: Optional[str] = None
 
 
 # ------------------------------- routes -------------------------------
@@ -134,6 +146,12 @@ def universities(q: str = "", limit: int = 20) -> List[Dict[str, Any]]:
 @app.get("/tax_treaty_countries")
 def tax_treaty_countries() -> Dict[str, Any]:
     return _load_json(paths.TAX_TREATY_PATH)
+
+
+@app.post("/status_calendar")
+def status_calendar(req: CalendarRequest) -> Dict[str, Any]:
+    # Dates are used to compute cited milestones and are NOT stored or logged.
+    return compute_calendar(req.dict())
 
 
 @app.get("/guides")
