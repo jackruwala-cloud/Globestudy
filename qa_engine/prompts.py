@@ -41,10 +41,51 @@ REFERRALS = {
         "Consumer Financial Protection Bureau (CFPB): https://www.consumerfinance.gov/",
         "Your school's financial aid or student services office.",
     ],
+    "campus_legal": [
+        "Your school's Title IX Office / Office of Student Conduct / Dean of Students — they run the process and can explain your rights, the steps, and the timeline.",
+        "Your campus Student Legal Services (many schools offer free, confidential legal help to students), or a licensed attorney for anything serious.",
+        "Your DSO / international student office — to understand any effect on your enrollment and F-1 status. Keep them informed early and confidentially.",
+    ],
     "general": [
         "Your school's international student office (DSO) — the best first stop for visa, work, and tax-orientation questions.",
         "A licensed professional in the relevant area (tax professional or immigration attorney).",
     ],
+}
+
+# Constructive, non-fabricated orientation shown when we have no verified source.
+# It tells the student how to think about their problem and who owns it, WITHOUT
+# asserting any specific tax/legal/immigration rule.
+ORIENTATION = {
+    "tax": (
+        "This is a U.S. tax-filing question, and the answer usually turns on your "
+        "income type (wages on a W-2, a scholarship/fellowship, or no income) and "
+        "your residency status. I don't have an official source that squarely "
+        "covers your exact situation, so rather than guess, here is who can look at "
+        "your specifics:"
+    ),
+    "visa": (
+        "This is an immigration/status question, and the exact rule usually depends "
+        "on your SEVIS record and program dates — which your DSO can actually see. "
+        "I don't have an official source that squarely covers it, so start here:"
+    ),
+    "finance": (
+        "This is a personal-finance question — it depends on your income, expenses, "
+        "and goals. I don't have an official source that covers your exact case, but "
+        "these can help you work through it:"
+    ),
+    "campus_legal": (
+        "This looks like a campus-conduct or legal matter (for example a Title IX "
+        "case, a disciplinary hearing, or a police/legal issue). These are handled "
+        "by specific campus offices and, where needed, an attorney — not by tax or "
+        "immigration rules, and I won't guess at legal specifics. One important "
+        "thing to know: because a disciplinary or legal outcome can affect your "
+        "enrollment, and your F-1 status depends on staying enrolled, it's worth "
+        "looping in your DSO early. Here's who handles this:"
+    ),
+    "general": (
+        "I don't have a verified official source that squarely covers this, so I "
+        "won't guess. Here's who can point you the right way:"
+    ),
 }
 
 

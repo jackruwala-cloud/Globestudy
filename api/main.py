@@ -18,6 +18,7 @@ import json
 import os
 import time
 from typing import Any, Dict, List, Optional
+from urllib.parse import quote_plus
 
 import requests
 from fastapi import FastAPI
@@ -104,16 +105,36 @@ def health() -> Dict[str, Any]:
     }
 
 
+def _office_link(u: Dict[str, Any]) -> Dict[str, Any]:
+    """Best link to the school's INTERNATIONAL STUDENT office (not its homepage).
+
+    Uses the curated office URL when we have one; otherwise a search scoped to the
+    school's own domain, which reliably lands on the ISSS/international-office page
+    rather than the university homepage.
+    """
+    curated = u.get("international_office_url")
+    if curated:
+        return {"url": curated, "is_search": False}
+    domain = u.get("domain")
+    if domain:
+        query = "international student office site:" + domain
+    else:
+        query = (u.get("name", "") + " international student office").strip()
+    return {"url": "https://www.google.com/search?q=" + quote_plus(query), "is_search": True}
+
+
 def _school_context(university_id: Optional[str]) -> Optional[Dict[str, Any]]:
     if not university_id:
         return None
     u = _UNI_BY_ID.get(university_id)
     if not u:
         return None
+    office = _office_link(u)
     return {
         "university_id": u["id"],
         "name": u["name"],
-        "international_office_url": u.get("international_office_url") or u.get("main_url"),
+        "international_office_url": office["url"],
+        "international_office_is_search": office["is_search"],
         "has_curated_source": university_id in _UNIS_WITH_SOURCE,
     }
 
@@ -138,7 +159,7 @@ def universities(q: str = "", limit: int = 20) -> List[Dict[str, Any]]:
     return [
         {
             "id": u["id"], "name": u["name"], "city": u.get("city", ""), "state": u.get("state", ""),
-            "international_office_url": u.get("international_office_url") or u.get("main_url"),
+            "international_office_url": _office_link(u)["url"],
             "has_curated_source": u["id"] in _UNIS_WITH_SOURCE,
         }
         for u in matches

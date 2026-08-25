@@ -13,6 +13,16 @@
       "summary": "When F-1/J-1 students are exempt from Social Security and Medicare (FICA) taxes, how the exemption is tied to nonresident status, and that OPT/CPT wages are covered while the student is a nonresident alien."
     },
     {
+      "id": "irs_student_filing",
+      "title": "IRS: Do International Students Have to File a U.S. Tax Return? (Which Form)",
+      "file": "documents/irs_student_filing.md",
+      "url": "https://www.irs.gov/individuals/international-taxpayers/foreign-students-scholars-teachers-researchers-and-exchange-visitors",
+      "publisher": "Internal Revenue Service (IRS)",
+      "category": "tax",
+      "retrieved_date": "2026-08-25",
+      "summary": "Whether an F-1 student must file a U.S. tax return based on their situation: U.S. wages from a job (W-2) generally require Form 1040-NR; no income still generally requires Form 8843; scholarships/treaty income (1042-S) must be reported. Which form to file and where to get help."
+    },
+    {
       "id": "irs_pub519_residency",
       "title": "IRS Publication 519: Substantial Presence Test and the Exempt Individual Rule",
       "file": "documents/irs_pub519_residency.md",

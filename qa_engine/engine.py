@@ -143,22 +143,21 @@ def _llm_answer(question: str, supporting: List[Retrieved], cfg: Dict[str, Any])
 
 def _no_source_answer(question: str, risk, cfg: Dict[str, Any], top_score: float = 0.0) -> Answer:
     category = "general"
-    # Bias referral category off the risk terms / question wording.
+    # Bias referral category off the question wording. Campus-conduct/legal is
+    # checked first (it's out of scope for tax/visa rules but needs real direction).
     q = question.lower()
-    if any(t in q for t in ("tax", "fica", "1040", "8843", "1042", "withhold", "refund", "treaty", "resident")):
+    if any(t in q for t in ("title ix", "title 9", "disciplinary", "misconduct", "student conduct",
+                            "expel", "suspend", "dismiss", "arrest", "police", "charged with",
+                            "lawsuit", "hearing", "probation", "dean of students")):
+        category = "campus_legal"
+    elif any(t in q for t in ("tax", "fica", "1040", "8843", "1042", "withhold", "refund", "treaty", "resident", "w-2")):
         category = "tax"
     elif any(t in q for t in ("visa", "opt", "cpt", "stem", "sevis", "ead", "status", "work", "i-765", "i-20")):
         category = "visa"
-    elif any(t in q for t in ("money", "remittance", "budget", "bank", "credit", "exchange")):
+    elif any(t in q for t in ("money", "remittance", "budget", "bank", "credit", "exchange", "save", "invest")):
         category = "finance"
 
-    body = (
-        "**I don't have a verified primary source for this in my current knowledge "
-        "base, so I won't guess.** On visa, tax, and financial questions a "
-        "plausible-sounding answer is not good enough — every answer here has to be "
-        "traceable to an official source, and I couldn't find one that clearly "
-        "covers your question.\n\nHere's who to ask instead:"
-    )
+    body = prompts.ORIENTATION.get(category, prompts.ORIENTATION["general"])
     referrals = prompts.REFERRALS.get(category, prompts.REFERRALS["general"])
 
     return Answer(
