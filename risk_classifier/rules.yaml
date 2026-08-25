@@ -1,68 +1,100 @@
-# Risk classification rules. Edit these to tune how questions are categorized.
-# Matching is case-insensitive whole-word/substring on the question text.
+# Risk classification rules — INTENT-based, not topic-based.
 #
-# Policy: when in doubt, classify HIGH. It is safer to over-warn than to present
-# a visa/tax answer as final. A question is LOW only when it matches a low-stakes
-# term AND matches no high-stakes term.
+# Design: a visa/tax TOPIC alone is not "high-stakes." What makes a question
+# high-stakes is that the student is about to DO something consequential —
+# apply, file, travel, change enrollment — or may already be in a status
+# problem. Reserve the prominent "verify before you act" notice for those.
+# Everything else is normal informational content: still cited, and always
+# under the permanent footer disclaimer, but WITHOUT a loud per-answer warning.
+#
+# Default when nothing matches: NORMAL (not high-stakes). The always-visible
+# disclaimer already carries baseline caution.
 
 high_stakes:
   description: >
-    Visa status implications, tax filing specifics, and work-authorization limits.
-    Always shown with a "verify with a licensed professional / your DSO" notice.
+    The student is about to take a consequential action (apply/file/travel/
+    change status or enrollment), faces a deadline, is asking whether they are
+    eligible/allowed, or may already be out of status. These show the
+    "confirm before you act" notice.
   keywords:
-    - visa
-    - status
-    - immigration
-    - deport
+    # applying / filing an application / deadlines
+    - apply
+    - applying
+    - application
+    - reapply
+    - file for
+    - petition
+    - deadline
+    - due date
+    - how long do i have
+    - too late
+    - missed
+    # eligibility / permission to act
+    - eligible
+    - eligibility
+    - qualify
+    - am i allowed
+    - allowed to
+    - am i able to
+    # enrollment changes that risk status
+    - drop below
+    - below full time
+    - full-time
+    - reduced course load
+    - reduce my course load
+    - withdraw
+    - leave of absence
+    - gap semester
+    - transfer school
+    - transfer to
+    - change my major
+    # work-authorization limits / clocks
+    - unemployment
+    - 90 days
+    - 150 days
+    - how many days
+    # travel / re-entry
+    - travel
+    - re-enter
+    - reenter
+    - re-entry
+    - reentry
+    - travel signature
+    - leave the country
+    - come back
+    - visa stamp
+    - visa expired
+    - renew my visa
+    - renew visa
+    # status problems (already or potentially in trouble)
     - out of status
+    - overstay
+    - overstayed
     - unlawful presence
-    - opt
-    - cpt
-    - stem
-    - ead
-    - work authorization
-    - work permit
-    - i-765
-    - i-983
-    - i-20
-    - i20
-    - sevis
-    - dso
-    - unemployment limit
-    - on-campus hours
-    - hours can i work
-    - hours per week
-    - tax
-    - taxes
-    - taxed
-    - filing
-    - file a return
-    - "1040"
-    - 1040nr
-    - "8843"
-    - "1042"
-    - w-2
-    - fica
-    - social security
-    - medicare
-    - withholding
-    - treaty
-    - resident
-    - nonresident
-    - residency
-    - substantial presence
-    - ssn
-    - itin
-    - refund
-    - deduction
-    - scholarship
-    - fellowship
-    - stipend
+    - reinstate
+    - reinstatement
+    - status violation
+    - deport
+    - removal
+    - termination
+    - sevis terminated
+    # extensions / status changes / next status
+    - extension
+    - extend my
+    - change of status
+    - change status
+    - adjust status
+    - adjustment of status
+    - green card
+    - h-1b
+    - h1b
+    - cap gap
+    - cap-gap
 
 low_stakes:
   description: >
-    General financial literacy and how things work in principle. Can be answered
-    more directly, but still cited to a source.
+    General financial literacy / how things work in principle. Answered
+    directly, still cited.
   keywords:
     - budget
     - budgeting

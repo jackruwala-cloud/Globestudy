@@ -17,11 +17,10 @@ DISCLAIMER = (
 )
 
 HIGH_STAKES_NOTICE = (
-    "This is a high-stakes question (it can affect your visa status, tax filing, "
-    "or work authorization). Treat the answer below as a starting point, not the "
-    "final word — verify it with your Designated School Official (DSO) / "
-    "international student office and a licensed professional (a tax professional "
-    "experienced with nonresident returns, or an immigration attorney)."
+    "Before you act on this — applying, filing, traveling, or changing your "
+    "enrollment or status — confirm the specifics with your DSO / international "
+    "student office (and a licensed professional where money or legal filings are "
+    "involved). Timing and eligibility depend on your individual record."
 )
 
 # Who to contact when we have no confident source, by topic.

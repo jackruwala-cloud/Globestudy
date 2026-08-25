@@ -21,11 +21,12 @@ _RULES_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "rules.ya
 _FALLBACK = {
     "high_stakes": {
         "keywords": [
-            "visa", "status", "immigration", "opt", "cpt", "stem", "ead",
-            "work authorization", "sevis", "i-765", "i-20", "tax", "taxes",
-            "taxed", "filing", "1040", "8843", "1042", "fica", "social security",
-            "medicare", "withholding", "treaty", "resident", "nonresident",
-            "ssn", "itin", "refund", "scholarship", "hours can i work",
+            "apply", "applying", "application", "deadline", "eligible", "eligibility",
+            "qualify", "am i allowed", "drop below", "below full time", "full-time",
+            "reduced course load", "withdraw", "transfer school", "unemployment",
+            "travel", "re-enter", "reenter", "reentry", "renew my visa",
+            "out of status", "overstay", "reinstate", "deport", "change of status",
+            "adjust status", "green card", "h-1b", "extension", "extend my",
         ]
     },
     "low_stakes": {
@@ -88,22 +89,23 @@ def classify(question: str) -> RiskResult:
 
     if high:
         reasoning = (
-            "HIGH: matched high-stakes term(s): {}. These touch visa status, tax "
-            "filing, or work-authorization limits, so a professional-verification "
-            "notice is required.".format(", ".join(high))
+            "HIGH: matched action/consequence term(s): {}. The student is about to "
+            "act (apply/file/travel/change enrollment), faces a deadline/eligibility "
+            "question, or may be in a status problem — so the 'confirm before you "
+            "act' notice is shown.".format(", ".join(high))
         )
         return RiskResult("HIGH", high, low, reasoning)
 
     if low:
         reasoning = (
-            "LOW: matched low-stakes term(s): {}, and no high-stakes terms. Treated "
-            "as general financial literacy — still answered only from cited sources."
-            .format(", ".join(low))
+            "LOW: matched general financial-literacy term(s): {}. Answered directly "
+            "and still cited.".format(", ".join(low))
         )
         return RiskResult("LOW", high, low, reasoning)
 
     reasoning = (
-        "HIGH (default): no low-stakes terms matched and stakes are unclear. "
-        "Defaulting to HIGH so the answer is not presented as the final word."
+        "NORMAL (default): informational question with no consequential-action "
+        "trigger. Answered and cited, under the permanent footer disclaimer, "
+        "without a loud per-answer high-stakes notice."
     )
-    return RiskResult("HIGH", high, low, reasoning)
+    return RiskResult("LOW", high, low, reasoning)
