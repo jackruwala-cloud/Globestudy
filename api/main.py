@@ -16,8 +16,10 @@ from __future__ import annotations
 
 import json
 import os
+import time
 from typing import Any, Dict, List, Optional
 
+import requests
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -152,6 +154,53 @@ def tax_treaty_countries() -> Dict[str, Any]:
 def status_calendar(req: CalendarRequest) -> Dict[str, Any]:
     # Dates are used to compute cited milestones and are NOT stored or logged.
     return compute_calendar(req.dict())
+
+
+# --- Official news feed (Federal Register API — free, official, no key) ---
+_FR_API = "https://www.federalregister.gov/api/v1/documents.json"
+_news_cache: Dict[str, Any] = {"ts": 0.0, "data": None}
+_NEWS_TTL = 1800  # 30 minutes
+
+
+def _fetch_news() -> Dict[str, Any]:
+    params = {
+        "per_page": 20,
+        "order": "newest",
+        "conditions[term]": "nonimmigrant students exchange visitors F-1",
+        "conditions[agencies][]": "homeland-security-department",
+        "fields[]": ["document_number", "title", "abstract", "publication_date",
+                     "effective_on", "html_url", "type", "agencies"],
+    }
+    try:
+        r = requests.get(_FR_API, params=params, timeout=15,
+                         headers={"User-Agent": "globestudy-news/1.0"})
+        r.raise_for_status()
+        raw = r.json()
+        items = []
+        for d in raw.get("results", []):
+            items.append({
+                "title": d.get("title"),
+                "abstract": d.get("abstract"),
+                "type": d.get("type"),  # Rule, Proposed Rule, Notice
+                "publication_date": d.get("publication_date"),
+                "effective_on": d.get("effective_on"),
+                "url": d.get("html_url"),
+                "agencies": [a.get("name") for a in (d.get("agencies") or []) if a.get("name")],
+                "publisher": "Federal Register (U.S. government)",
+            })
+        return {"source": "Federal Register", "source_url": "https://www.federalregister.gov/",
+                "official": True, "items": items, "error": None}
+    except Exception as exc:
+        return {"source": "Federal Register", "official": True, "items": [], "error": str(exc)}
+
+
+@app.get("/news")
+def news() -> Dict[str, Any]:
+    now = time.time()
+    if _news_cache["data"] is None or (now - _news_cache["ts"]) > _NEWS_TTL:
+        _news_cache["data"] = _fetch_news()
+        _news_cache["ts"] = now
+    return _news_cache["data"]
 
 
 @app.get("/guides")

@@ -3,6 +3,9 @@
 ## What is changing
 On July 17, 2026, the U.S. Department of Homeland Security (DHS) published a final rule, "Establishing a Fixed Time Period of Admission and an Extension of Stay Procedure for Nonimmigrant Academic Students, Exchange Visitors, and Representatives of Foreign Information Media." It replaces the long-standing "duration of status" (D/S) framework for F (academic student), J (exchange visitor), and I (foreign media) nonimmigrants with a fixed, time-limited period of admission. The rule's effective date is September 15, 2026.
 
+## How long can you stay in the U.S. as an F-1 student?
+This is the core of what is changing. Before this rule, an F-1 student could stay as long as they maintained status ("duration of status"), with no fixed end date on their admission. Under the new rule (effective September 15, 2026), how long you can stay is fixed: you are admitted until your Form I-20 program end date, up to a maximum of 4 years, plus a 30-day grace period afterward. To remain longer than that fixed admission period, you must file an Extension of Stay (EOS) with USCIS. Your exact authorized stay depends on your I-20 dates and which rule applies to you — confirm with your DSO.
+
 ## What "duration of status" meant (the old rule)
 Under duration of status, an F-1 student was admitted for as long as they maintained status in their program, with no single fixed end date on the admission, plus a 60-day grace period after completing the program or authorized practical training.
 
