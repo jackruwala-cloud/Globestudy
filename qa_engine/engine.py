@@ -57,8 +57,11 @@ class Answer:
 
 def _confidence_label(top_score: float, cfg: Dict[str, Any]) -> str:
     r = cfg["retrieval"]
-    if top_score < r["min_score"]:
+    partial_floor = r.get("partial_floor", r["min_score"])
+    if top_score < partial_floor:
         return "none"
+    if top_score < r["min_score"]:
+        return "low"  # near-miss: show closest source, flagged as partial
     if top_score >= r["high_conf_score"]:
         return "high"
     return "medium"
@@ -69,6 +72,8 @@ def _coverage_note(supporting: List[Retrieved], confidence: str) -> str:
     sources = len({r.chunk["source_id"] for r in supporting})
     if confidence == "none":
         return "No source in the knowledge base matched this question with enough confidence."
+    if confidence == "low":
+        return "Partial: no source squarely matched — showing the closest official source(s)."
     strength = {"high": "strong", "medium": "partial"}.get(confidence, "partial")
     return "{} match: {} passage(s) from {} primary source document(s).".format(
         strength.capitalize(), n, sources
@@ -266,6 +271,10 @@ def answer(question: str, university_id: Optional[str] = None) -> Answer:
     if body is None:
         mode = "extractive" if mode == "extractive" else "extractive(fallback)"
         body = _extractive_answer(supporting)
+
+    # Near-miss (partial) answers lead with an explicit partial-coverage notice.
+    if confidence == "low":
+        body = prompts.PARTIAL_NOTICE + "\n\n" + body
 
     ans = Answer(
         id=str(uuid.uuid4()),

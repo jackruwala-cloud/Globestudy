@@ -16,6 +16,13 @@ DISCLAIMER = (
     "licensed professional before acting."
 )
 
+PARTIAL_NOTICE = (
+    "**I don't have a source that squarely answers this, so treat this as a "
+    "partial answer.** Here's the closest official information I have — it may "
+    "not fully cover your exact question. Verify the specifics with your DSO / "
+    "international student office or a licensed professional."
+)
+
 HIGH_STAKES_NOTICE = (
     "Before you act on this — applying, filing, traveling, or changing your "
     "enrollment or status — confirm the specifics with your DSO / international "

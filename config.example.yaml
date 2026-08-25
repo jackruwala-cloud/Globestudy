@@ -7,7 +7,8 @@
 retrieval:
   backend: tfidf        # tfidf (default, pure-Python, offline) | chroma
   top_k: 5
-  min_score: 0.19       # if the top result is below this, refuse to answer (no guessing)
+  min_score: 0.19       # at/above this = a confident answer (high/medium)
+  partial_floor: 0.15   # partial_floor..min_score = near-miss: show closest source, flagged partial
   support_floor: 0.10   # once answering, include supporting citations down to here
   high_conf_score: 0.28 # at/above this the top match is labeled "high" confidence
 

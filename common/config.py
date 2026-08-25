@@ -27,6 +27,10 @@ DEFAULTS: Dict[str, Any] = {
         "min_score": 0.19,
         "support_floor": 0.10,
         "high_conf_score": 0.28,
+        # Near-miss band: partial_floor <= top < min_score shows the CLOSEST cited
+        # source, clearly flagged as partial, instead of refusing. Below
+        # partial_floor we still refuse (genuinely off-topic).
+        "partial_floor": 0.15,
     },
     "qa": {
         # "extractive" (default) composes the answer ONLY from retrieved source
