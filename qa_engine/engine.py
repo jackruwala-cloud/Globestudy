@@ -275,6 +275,56 @@ def _live_answer(question: str, risk, cfg: Dict[str, Any], university_domain: Op
     )
 
 
+# Topic signals for the cross-topic guard. TF-IDF matches words, not meaning, so a
+# rare token can collide across topics (e.g. an immigration "green card" question
+# hitting IRS Pub 519's tax "Green Card Test"). If a question clearly signals one
+# category but the top match is a different category, we don't serve that tangential
+# curated hit — we route to the official fallback / refusal instead.
+_TOPIC_SIGNALS = {
+    "visa": [
+        "green card", "green-card", "greencard", "adjustment of status", "adjust status",
+        "change of status", "marriage", "married", "spouse", "fiance", "fiancé", "petition",
+        "asylum", "permanent resident", "permanent residency", "citizenship", "naturalization",
+        "i-485", "i-130", "i-140", "h-1b", "h1b", "cap gap", "consular", "dual intent",
+        "visa", "sevis", "i-20", "i-94", "ead", "opt", "cpt", "stem", "work authorization",
+        "work permit", "travel", "re-enter", "reenter", "re-entry", "reentry", "deport",
+        "overstay", "out of status", "uscis", "immigration", "f-1", "f1", "j-1", "j1",
+        "port of entry", "on campus", "off campus", "green card test",
+    ],
+    "tax": [
+        "tax", "taxes", "taxed", "taxation", "tax return", "file taxes", "filing", "1040",
+        "1040nr", "1042", "8843", "w-2", "w2", "fica", "withholding", "withhold", "refund",
+        "treaty", "deduction", "itin", "irs", "substantial presence", "nonresident alien",
+    ],
+    "finance": [
+        "budget", "budgeting", "saving", "savings", "invest", "investing", "remittance",
+        "send money", "exchange rate", "credit score", "credit card", "bank account",
+        "checking account", "cost of living",
+    ],
+}
+
+
+def _question_topics(question: str) -> set:
+    import re
+
+    text = (question or "").lower()
+    topics = set()
+    for category, signals in _TOPIC_SIGNALS.items():
+        for s in signals:
+            if re.search(r"(?<!\w)" + re.escape(s) + r"(?!\w)", text):
+                topics.add(category)
+                break
+    return topics
+
+
+def _topic_mismatch(question: str, chunk: Dict[str, Any]) -> bool:
+    """True if the question clearly signals topic(s) that exclude the chunk's category."""
+    topics = _question_topics(question)
+    if not topics:
+        return False  # no clear topic -> don't second-guess retrieval
+    return chunk.get("category") not in topics
+
+
 def answer(
     question: str,
     university_id: Optional[str] = None,
@@ -298,6 +348,14 @@ def answer(
 
     top_score = results[0].score if results else 0.0
     confidence = _confidence_label(top_score, cfg)
+
+    # Cross-topic guard: a strong-looking match can be a keyword collision across
+    # topics (e.g. an immigration "green card" question hitting the tax "Green Card
+    # Test"). If the top match's category conflicts with the question's clear topic,
+    # treat it as uncovered so the official fallback / refusal handles it instead of
+    # serving a confident but off-topic curated answer.
+    if results and confidence != "none" and _topic_mismatch(question, results[0].chunk):
+        confidence = "none"
 
     # On WEAK matches (no match, or a near-miss/partial where the curated hit is
     # likely tangential), try a live search restricted to OFFICIAL sources before
