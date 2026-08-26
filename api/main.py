@@ -21,9 +21,11 @@ from typing import Any, Dict, List, Optional
 from urllib.parse import quote_plus
 
 import requests
-from fastapi import FastAPI
+from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
+from api import security
 
 from common import config, paths
 from ingestion.chunker import load_manifest
@@ -139,8 +141,44 @@ def _school_context(university_id: Optional[str]) -> Optional[Dict[str, Any]]:
     }
 
 
+def _require_user(authorization: Optional[str]) -> Optional[str]:
+    """Auth-gate: return the user id, or raise 401. No-op when enforcement is off."""
+    if not security.enforcement_enabled():
+        return None
+    user_id = security.verify_user(security.bearer_token(authorization))
+    if not user_id:
+        raise HTTPException(
+            status_code=401,
+            detail={"error": "auth_required", "message": "Please sign in to ask questions."},
+        )
+    return user_id
+
+
+@app.get("/usage")
+def usage(authorization: Optional[str] = Header(None)) -> Dict[str, Any]:
+    if not security.enforcement_enabled():
+        return {"enforced": False, "used": 0, "limit": None, "remaining": None}
+    user_id = _require_user(authorization)
+    used = security.usage_today(user_id)
+    limit = security.FREE_DAILY_LIMIT
+    return {"enforced": True, "used": used, "limit": limit, "remaining": max(0, limit - used)}
+
+
 @app.post("/ask")
-def ask(req: AskRequest) -> Dict[str, Any]:
+def ask(req: AskRequest, authorization: Optional[str] = Header(None)) -> Dict[str, Any]:
+    user_id = _require_user(authorization)
+    if user_id is not None:
+        allowed, used, limit = security.check_and_consume(user_id)
+        if not allowed:
+            raise HTTPException(
+                status_code=429,
+                detail={
+                    "error": "limit_reached",
+                    "message": "You've used all {} of your free questions for today. Your limit resets tomorrow.".format(limit),
+                    "used": used,
+                    "limit": limit,
+                },
+            )
     _uni = _UNI_BY_ID.get(req.university_id) if req.university_id else None
     _uni_domain = _uni.get("domain") if _uni else None
     result = engine_answer(
