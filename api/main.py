@@ -141,7 +141,11 @@ def _school_context(university_id: Optional[str]) -> Optional[Dict[str, Any]]:
 
 @app.post("/ask")
 def ask(req: AskRequest) -> Dict[str, Any]:
-    result = engine_answer(req.question, university_id=req.university_id).to_dict()
+    _uni = _UNI_BY_ID.get(req.university_id) if req.university_id else None
+    _uni_domain = _uni.get("domain") if _uni else None
+    result = engine_answer(
+        req.question, university_id=req.university_id, university_domain=_uni_domain
+    ).to_dict()
     # Attach the student's school office as context so the app can always show a
     # DSO/office pointer, even when no school-specific source was curated yet.
     result["school_context"] = _school_context(req.university_id)

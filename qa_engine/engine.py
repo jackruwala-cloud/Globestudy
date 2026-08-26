@@ -227,7 +227,59 @@ def _guide_answer(question: str, guide: Dict[str, Any], risk, cfg: Dict[str, Any
     )
 
 
-def answer(question: str, university_id: Optional[str] = None) -> Answer:
+def _live_answer(question: str, risk, cfg: Dict[str, Any], university_domain: Optional[str]) -> Optional[Answer]:
+    """Build an Answer from a live, official-domain-restricted Perplexity search."""
+    import datetime
+    from urllib.parse import urlparse
+
+    from qa_engine import live_search
+
+    res = live_search.live_official_answer(question, cfg, university_domain)
+    if not res:
+        return None
+
+    today = datetime.date.today().isoformat()
+    citations: List[Citation] = []
+    for i, c in enumerate(res["citations"][:6], start=1):
+        host = (urlparse(c["url"]).hostname or "").replace("www.", "")
+        citations.append(
+            Citation(
+                n=i,
+                source_title=c["title"] or host,
+                publisher=host,
+                section="Live official-source search",
+                url=c["url"],
+                retrieved_date=today,
+                score=0.0,
+            )
+        )
+    body = (
+        "**Answered from a live search of official government / university sites** "
+        "(not from our curated source set — please verify at the linked official "
+        "pages below).\n\n" + res["answer"]
+    )
+    return Answer(
+        id=str(uuid.uuid4()),
+        question=question,
+        answered=True,
+        confidence="medium",
+        coverage="Live search restricted to official sources ({} citation(s)).".format(len(citations)),
+        top_score=0.0,
+        mode="live_official_search",
+        answer_markdown=body,
+        citations=citations,
+        referrals=[],
+        risk_level=risk.level,
+        risk_reasoning=risk.reasoning,
+        high_stakes_notice=prompts.HIGH_STAKES_NOTICE if risk.level == "HIGH" else None,
+    )
+
+
+def answer(
+    question: str,
+    university_id: Optional[str] = None,
+    university_domain: Optional[str] = None,
+) -> Answer:
     cfg = config.get_config()
     risk = classify(question)
 
@@ -247,10 +299,28 @@ def answer(question: str, university_id: Optional[str] = None) -> Answer:
     top_score = results[0].score if results else 0.0
     confidence = _confidence_label(top_score, cfg)
 
+    # On WEAK matches (no match, or a near-miss/partial where the curated hit is
+    # likely tangential), try a live search restricted to OFFICIAL sources before
+    # refusing or showing a weak partial. A live official answer beats a tangential
+    # curated one; if none is available we keep the honest curated behavior.
+    live_on = cfg["qa"].get("live_fallback") and (cfg.get("perplexity", {}) or {}).get("api_key")
+
     if confidence == "none":
+        if live_on:
+            live = _live_answer(question, risk, cfg, university_domain)
+            if live is not None:
+                _log(live)
+                return live
         ans = _no_source_answer(question, risk, cfg, top_score=top_score)
         _log(ans)
         return ans
+
+    if confidence == "low" and live_on:
+        live = _live_answer(question, risk, cfg, university_domain)
+        if live is not None:
+            _log(live)
+            return live
+        # else fall through to the partial curated answer below
 
     support_floor = cfg["retrieval"].get("support_floor", cfg["retrieval"]["min_score"])
     supporting = [r for r in results if r.score >= support_floor][: cfg["qa"]["max_context_chunks"]]

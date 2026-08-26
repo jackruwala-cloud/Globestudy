@@ -39,10 +39,19 @@ DEFAULTS: Dict[str, Any] = {
         "mode": "extractive",
         "llm_model": "claude-sonnet-5",
         "max_context_chunks": 4,
+        # When the curated KB would refuse (confidence "none"), fall back to a
+        # live Perplexity search restricted to OFFICIAL domains, instead of a
+        # dead-end. Requires a Perplexity API key. Off unless a key is present.
+        "live_fallback": True,
     },
     "anthropic": {
         # Prefer the ANTHROPIC_API_KEY environment variable. Leave blank here.
         "api_key": "",
+    },
+    "perplexity": {
+        # Prefer the PERPLEXITY_API_KEY environment variable. Leave blank here.
+        "api_key": "",
+        "model": "sonar",
     },
 }
 
@@ -90,6 +99,9 @@ def get_config(reload: bool = False) -> Dict[str, Any]:
     env_key = os.environ.get("ANTHROPIC_API_KEY")
     if env_key:
         cfg["anthropic"]["api_key"] = env_key
+    env_pplx = os.environ.get("PERPLEXITY_API_KEY")
+    if env_pplx:
+        cfg["perplexity"]["api_key"] = env_pplx
     env_mode = os.environ.get("QA_MODE")
     if env_mode:
         cfg["qa"]["mode"] = env_mode
