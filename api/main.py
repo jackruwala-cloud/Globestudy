@@ -48,7 +48,7 @@ _UNIS_WITH_SOURCE = {
     if s.get("scope") == "university" and s.get("university_id")
 }
 
-app = FastAPI(title="International Student Advisor API", version="0.2.0")
+app = FastAPI(title="StatusCompass API", version="0.2.0")
 
 # Restrict origins in production via the ALLOWED_ORIGINS env var
 # (comma-separated), e.g. "https://your-app.lovable.app,https://yourdomain.com".
@@ -198,7 +198,7 @@ def _fetch_news() -> Dict[str, Any]:
     }
     try:
         r = requests.get(_FR_API, params=params, timeout=15,
-                         headers={"User-Agent": "globestudy-news/1.0"})
+                         headers={"User-Agent": "statuscompass-news/1.0"})
         r.raise_for_status()
         raw = r.json()
         items = []

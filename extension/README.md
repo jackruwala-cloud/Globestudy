@@ -1,4 +1,4 @@
-# GlobeStudy Browser Extension (Chrome, MV3)
+# StatusCompass Browser Extension (Chrome, MV3)
 
 A quick-answer popup for international students. It calls the same citation API
 as the web app — every answer shows its official sources, confidence, and risk
@@ -15,7 +15,7 @@ level, and refuses when there's no verified source.
 1. Deploy the API (see ../DEPLOY.md) or run it locally (`./run.sh api`).
 2. Open `chrome://extensions`, toggle **Developer mode** (top right).
 3. Click **Load unpacked** and select this `extension/` folder.
-4. Click the puzzle icon → pin "GlobeStudy — Student Advisor".
+4. Click the puzzle icon → pin "StatusCompass — Student Advisor".
 5. Open the popup → ⚙️ → set the **API base URL** → Test connection → Save.
 
 Works in Chrome and other Chromium browsers (Edge, Brave, Arc). Voice input

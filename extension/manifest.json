@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "GlobeStudy — Student Advisor",
+  "name": "StatusCompass — Student Advisor",
   "version": "0.1.0",
   "description": "Quick, cited answers on U.S. visa, tax & money questions for international students. Every answer traces to an official source.",
   "action": {
-    "default_title": "GlobeStudy Advisor",
+    "default_title": "StatusCompass Advisor",
     "default_popup": "popup.html"
   },
   "options_page": "options.html",
