@@ -158,8 +158,8 @@ def _require_user(authorization: Optional[str]) -> Optional[str]:
 def usage(authorization: Optional[str] = Header(None)) -> Dict[str, Any]:
     if not security.enforcement_enabled():
         return {"enforced": False, "used": 0, "limit": None, "remaining": None}
-    user_id = _require_user(authorization)
-    used = security.usage_today(user_id)
+    _require_user(authorization)
+    used = security.usage_today(security.bearer_token(authorization))
     limit = security.FREE_DAILY_LIMIT
     return {"enforced": True, "used": used, "limit": limit, "remaining": max(0, limit - used)}
 
@@ -168,7 +168,7 @@ def usage(authorization: Optional[str] = Header(None)) -> Dict[str, Any]:
 def ask(req: AskRequest, authorization: Optional[str] = Header(None)) -> Dict[str, Any]:
     user_id = _require_user(authorization)
     if user_id is not None:
-        allowed, used, limit = security.check_and_consume(user_id)
+        allowed, used, limit = security.check_and_consume(user_id, security.bearer_token(authorization))
         if not allowed:
             raise HTTPException(
                 status_code=429,
